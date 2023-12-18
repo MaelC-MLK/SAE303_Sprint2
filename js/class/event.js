@@ -9,6 +9,7 @@ class Event {
     #location;
     #person;
     #groups;
+    #ressources;
 
     constructor(id, summary, description, start, end, location) {
         this.#id = id;
@@ -17,7 +18,7 @@ class Event {
         this.#start = new Date(start);
         this.#end = new Date(end);
         this.#location = location;
-
+        this.#ressources = summary.slice(summary.lastIndexOf(',') + 1);
 
         this.#groups = summary.slice(summary.lastIndexOf(',') + 1);
         this.#groups = this.#groups.split('.');
@@ -87,6 +88,24 @@ class Event {
     }
 
 
+    get semester() {
+        let regex;
+        if (this.#summary.startsWith('SAÉ')) {
+            regex = /SAÉ\s(\d+)/;
+        } else if (this.#summary.startsWith('R')) {
+            regex = /R(\d+)/;
+        } else {
+            return 'Non spécifié';
+        }
+
+        let match = this.#summary.match(regex);
+        if (match && match[1]) {
+            return match[1];
+        } else {
+            return 'Non spécifié';
+        }
+    }
+
     get ressources() {
         let ressources = this.#summary.split(" ");
         let ressources2 = ressources[0] + " " + ressources[1];
@@ -110,6 +129,7 @@ class Event {
             person : this.person,
             ressources : this.ressources,
             hours : this.hours,
+            semester : this.semester
         }
     }
 }
