@@ -7,6 +7,7 @@ class Event {
     #start;
     #end;
     #location;
+    #person;
     #groups;
 
     constructor(id, summary, description, start, end, location) {
@@ -22,7 +23,8 @@ class Event {
         this.#groups = this.#groups.split('.');
         this.#groups = this.#groups.map(gr => gr.replace(/\s/g, ""));
 
-
+        const matchperson = this.#summary.match(/^.*\d (.*)/);
+        this.#person = matchperson ? matchperson[1].toLowerCase() : null;
     }
 
     get id() {
@@ -79,11 +81,19 @@ class Event {
         }
     }
 
+
+    get person() {
+        return this.#person;
+    }
+
+
     get ressources() {
         let ressources = this.#summary.split(" ");
         let ressources2 = ressources[0] + " " + ressources[1];
         return ressources2;
     }
+
+    
 
     // retourne un objet contenant les informations de l'événement
     // dans un format compatible avec Toast UI Calendar (voir https://nhn.github.io/tui.calendar/latest/EventObject)
@@ -97,7 +107,7 @@ class Event {
             location: this.#location,
             groups: this.#groups,
             type : this.type,
-            enseignant : this.enseignant,
+            person : this.person,
             ressources : this.ressources,
             hours : this.hours,
         }
