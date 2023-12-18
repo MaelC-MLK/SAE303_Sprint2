@@ -29,9 +29,9 @@ option = {
     }
   },
   legend: {
-    selected:{
-      'TOTAL':false
-      
+    selected: {
+      'TOTAL': false
+
     }
   },
   grid: {
@@ -106,7 +106,7 @@ option = {
       ]
     }
 
-    
+
   ]
 };
 
@@ -118,32 +118,34 @@ option = {
 for (let ev of tab) {
 
   allProf[ev] = data.filter((event) => { return event.title.includes(ev) });
-  
+
 }
 
+
+
 for (let ev in allProf) {
-  
-    let cm = 0;
-    let td = 0;
-    let tp = 0;
-  
-    for (let i = 0; i < allProf[ev].length; i++) {
-  
-      if (allProf[ev][i].title.includes("CM")) {
-       cm += allProf[ev][i].hours;
-      }
-      if (allProf[ev][i].title.includes("TD")) {
-        td += allProf[ev][i].hours;
-      }
-      if (allProf[ev][i].title.includes("TP")) {
-        tp += allProf[ev][i].hours;
-      }
+
+  let cm = 0;
+  let td = 0;
+  let tp = 0;
+
+  for (let i = 0; i < allProf[ev].length; i++) {
+
+    if (allProf[ev][i].title.includes("CM")) {
+      cm += allProf[ev][i].hours;
     }
-  
-    option.series[0].data.push(cm);
-    option.series[1].data.push(td);
-    option.series[2].data.push(tp);
-    option.series[3].data.push(cm + td + tp);
+    if (allProf[ev][i].title.includes("TD")) {
+      td += allProf[ev][i].hours;
+    }
+    if (allProf[ev][i].title.includes("TP")) {
+      tp += allProf[ev][i].hours;
+    }
+  }
+
+  option.series[0].data.push(cm);
+  option.series[1].data.push(td);
+  option.series[2].data.push(tp);
+  option.series[3].data.push(cm + td + tp);
 }
 
 console.log(allProf);

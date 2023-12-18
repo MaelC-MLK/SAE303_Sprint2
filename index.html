@@ -14,6 +14,20 @@
       box-sizing: border-box;
       font-family: 'Montserrat', sans-serif;
     }
+
+    .select_semester {
+      display: flex;
+      margin: 1rem 0 1rem 3rem;
+      z-index: 999;;
+      height: 2.5rem;
+      border: none;
+      outline: none;
+      background: #fff;
+      padding: 0 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
   </style>
 
 
@@ -21,6 +35,17 @@
 </head>
 
 <body>
+
+<select name="semestre" id="semestre" class="select_semester">
+  <option value="0">Tous les semestres</option>
+  <option value="1">Semestre 1</option>
+  <option value="2">Semestre 2</option>
+  <option value="3">Semestre 3</option>
+  <option value="4">Semestre 4</option>
+  <option value="5">Semestre 5</option>
+  <option value="6">Semestre 6</option>
+
+</select>
 
   <div id="main" style="width: 100%;height:100vh;"></div>
 
