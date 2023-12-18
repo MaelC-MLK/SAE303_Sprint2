@@ -25,74 +25,65 @@ var chartDom = document.getElementById('main');
 var myChart = echarts.init(chartDom, 'dark');
 var option;
 
-var series = [
-  {
-    data: [120, 200, 150, 80, 70, 110, 130],
-    type: 'bar',
-    stack: 'a',
-    name: 'a'
-  },
-  {
-    data: [10, 46, 64, '-', 0, '-', 0],
-    type: 'bar',
-    stack: 'a',
-    name: 'b'
-  },
-  {
-    data: [30, '-', 0, 20, 10, '-', 0],
-    type: 'bar',
-    stack: 'a',
-    name: 'c'
-  },
-];
-
-const stackInfo = {};
-for (let i = 0; i < series[0].data.length; ++i) {
-  for (let j = 0; j < series.length; ++j) {
-    const stackName = series[j].stack;
-    if (!stackName) {
-      continue;
-    }
-    if (!stackInfo[stackName]) {
-      stackInfo[stackName] = {
-        stackStart: [],
-        stackEnd: []
-      };
-    }
-    const info = stackInfo[stackName];
-    const data = series[j].data[i];
-    if (data && data !== '-') {
-      if (info.stackStart[i] == null) {
-        info.stackStart[i] = j;
-      }
-      info.stackEnd[i] = j;
-    }
-  }
-}
-for (let i = 0; i < series.length; ++i) {
-  const data = series[i].data;
-  const info = stackInfo[series[i].stack];
-  for (let j = 0; j < series[i].data.length; ++j) {
-    const isEnd = info.stackEnd[j] === i;
-    const topBorder = isEnd ? 20 : 0;
-    const bottomBorder = 0;
-    data[j] = {
-      value: data[j],
-      itemStyle: {
-        borderRadius: [topBorder, topBorder, bottomBorder, bottomBorder]
-      }
-    };
-  }
-}
 option = {
-  xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
   },
-  yAxis: {
+  legend: {},
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
     type: 'value'
   },
-  series: series
+  yAxis: {
+    type: 'category',
+    data: ['MOUTAT Audrey','MORA Frederic','ADAMCZYK Natacha','GUEDIRA Reda','LAVEFVE Valerie','SPRINGINSFELD Denis','CRESPIN Benoit','ADAM Fabrice','AYMARD Adrien','AYMARD Alain','BABIN Valentin','BONNAUD Lucile','BERTHIER Helene','CHANTELOUP Amelin','CREDEVILLE Maxime','CHUPIN Suzanne','DAL BELLO Marine','DEMAISON Guillaume','DULAC Benoit','DUBREUIL Anne-Sophie','FEYDI Philippe','FIAMMETTI Deborah','FLITTI Eric','GERAUD Fabien','GOUDARD Berenice','GRASSET Veronique','JARDOU Thomas','JAUFFRET Manon','JOUY Maxime','LAFONT Mathieu','LASCAUD Raphael','LAZARE Jean-Cedric','LE BAIL Emma','LECOMTE Catherine','MARTY Thomas','MONDOLLOT Remi','MINIER Jules','NENIN Cedric','PAILLIER Stephane','PINAUD Anais','PORRO Heinich','PORTAL Nicolas','SABOURIN Erwan','SINCLAIR Diego','THARAUD Sebastien','TZVETKOVA Maria','TURBELIN Pierre','VALETTE Sophie','LU Ines','KABAB Simon','VEILLON Pascal']
+  },
+  series: [
+    {
+      name: 'CM',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: []
+    },
+    {
+      name: 'TD',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: []
+    },
+    {
+      name: 'TP',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: []
+    },
+  ]
 };
 
 option && myChart.setOption(option);
