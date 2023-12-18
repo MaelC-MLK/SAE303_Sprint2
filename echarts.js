@@ -4,61 +4,39 @@ await M.init();
 
 
 var tab = [
-  { name: 'MOUTAT Audrey' },
-  { name: 'MORA Frédéric' },
-  { name: 'ADAMCZYK Natacha' },
-  { name: 'GUEDIRA Réda' },
-  { name: 'LAVEFVE Valérie' },
-  { name: 'SPRINGINSFELD Denis' },
-  { name: 'CRESPIN Benoit' },
-  { name: 'ADAM Fabrice' },
-  { name: 'AYMARD Adrien' },
-  { name: 'AYMARD Alain' },
-  { name: 'BABIN Valentin' },
-  { name: 'BONNAUD Lucile' },
-  { name: 'BERTHIER Hélène' },
-  { name: 'CHANTELOUP Amelin' },
-  { name: 'CREDEVILLE Maxime' },
-  { name: 'CHUPIN Suzanne' },
-  { name: 'DAL BELLO Marine' },
-  { name: 'DEMAISON Guillaume' },
-  { name: 'DULAC Benoit' },
-  { name: 'DUBREUIL Anne-Sophie' },
-  { name: 'FEYDI Philippe' },
-  { name: 'FIAMMETTI Deborah' },
-  { name: 'FLITTI Eric' },
-  { name: 'GERAUD Fabien' },
-  { name: 'GOUDARD Bérénice' },
-  { name: 'GRASSET Véronique' },
-  { name: 'JARDOU Thomas' },
-  { name: 'JAUFFRET Manon' },
-  { name: 'JOUY Maxime' },
-  { name: 'LAFONT Mathieu' },
-  { name: 'LASCAUD Raphaël' },
-  { name: 'LAZARE Jean-Cédric' },
-  { name: 'LE BAIL Emma' },
-  { name: 'LECOMTE Catherine' },
-  { name: 'MARTY Thomas' },
-  { name: 'MONDOLLOT Rémi' },
-  { name: 'MINIER Jules' },
-  { name: 'NENIN Cédric' },
-  { name: 'PAILLIER Stéphane' },
-  { name: 'PINAUD Anaïs' },
-  { name: 'PORRO Heinich' },
-  { name: 'PORTAL Nicolas' },
-  { name: 'SABOURIN Erwan' },
-  { name: 'SINCLAIR Diego' },
-  { name: 'THARAUD Sébastien' },
-  { name: 'TZVETKOVA Maria' },
-  { name: 'TURBELIN Pierre' },
-  { name: 'VALETTE Sophie' },
-  { name: 'LU Inès' },
-  { name: 'KABAB Simon' },
-  { name: 'VEILLON Pascal' }
+  "ADAM Fabrice", "ADAMCZYK Natacha", "AYMARD Adrien", "AYMARD Alain", "BABIN Valentin", "BERTHIER Hélène", "CHANTELOUP Amelin", "CHUPIN Suzanne", "CREDEVILLE Maxime", "CRESPIN Benoit", "DAL BELLO Marine", "DEMAISON Guillaume", "DUBREUIL Anne-Sophie", "DULAC Benoit", "FEYDI Philippe", "FIAMMETTI Deborah", "FLITTI Eric", "GERAUD Fabien", "GOUDARD Bérénice", "GRASSET Véronique", "GUEDIRA Réda", "JARDOU Thomas", "JAUFFRET Manon", "JOUY Maxime", "KABAB Simon", "LAFONT Mathieu", "LAVEFVE Valérie", "LASCAUD Raphaël", "LAZARE Jean-Cédric", "LE BAIL Emma", "LECOMTE Catherine", "LU Inès", "MARTY Thomas", "MINDOLLOT Rémi", "MORA Frédéric", "MOUTAT Audrey", "NENIN Cédric", "PAILLIER Stéphane", "PINAUD Anaïs", "PORRO Heinich", "PORTAL Nicolas", "SABOURIN Erwan", "SINCLAIR Diego", "SPRINGINSFELD Denis", "THARAUD Sébastien", "TZVETKOVA Maria", "TURBELIN Pierre", "VALETTE Sophie", "VEILLON Pascal"
 ];
 
+let allProf = {};
 
 const data = M.getEvents('mmi1').concat(M.getEvents('mmi2').concat(M.getEvents('mmi3')));
+
+
+for (let ev of tab) {
+
+  allProf[ev] = data.filter((event) => { return event.title.includes(ev) });
+  
+}
+
+for (let ev in allProf) {
+  let cm = 0;
+  let td = 0;
+  let tp = 0;
+  for (let i = 0; i < allProf[ev].length; i++) {
+    if (allProf[ev][i].title.includes("CM")) {
+      cm += allProf[ev][i].hours;
+    }
+    if (allProf[ev][i].title.includes("TD")) {
+      td += allProf[ev][i].hours;
+    }
+    if (allProf[ev][i].title.includes("TP")) {
+      tp += allProf[ev][i].hours;
+    }
+  }
+  allProf[ev] = [cm, td, tp];
+};
+
+console.log(allProf);
 
 import * as echarts from 'echarts';
 
@@ -86,7 +64,7 @@ option = {
   },
   yAxis: {
     type: 'category',
-    data: tab.map(e => e.name)
+    data: tab
   },
   series: [
     {
@@ -99,7 +77,9 @@ option = {
       emphasis: {
         focus: 'series'
       },
-      data: [320, 302, 301, 334, 390, 330, 320]
+      data: [
+
+      ]
     },
     {
       name: 'TD',
@@ -111,7 +91,9 @@ option = {
       emphasis: {
         focus: 'series'
       },
-      data: [120, 132, 101, 134, 90, 230, 210]
+      data: [
+
+      ]
     },
     {
       name: 'TP',
@@ -123,7 +105,9 @@ option = {
       emphasis: {
         focus: 'series'
       },
-      data: [220, 182, 191, 234, 290, 330, 310]
+      data: [
+
+      ]
     },
   ]
 };
