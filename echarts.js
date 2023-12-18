@@ -28,7 +28,12 @@ option = {
       type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
     }
   },
-  legend: {},
+  legend: {
+    selected:{
+      'TOTAL':false
+      
+    }
+  },
   grid: {
     left: '3%',
     right: '4%',
@@ -85,8 +90,30 @@ option = {
 
       ]
     },
+    {
+      name: 'TOTAL',
+      type: 'bar',
+
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [
+
+      ]
+    }
+
+    
   ]
 };
+
+
+
+
+
 
 for (let ev of tab) {
 
@@ -116,6 +143,7 @@ for (let ev in allProf) {
     option.series[0].data.push(cm);
     option.series[1].data.push(td);
     option.series[2].data.push(tp);
+    option.series[3].data.push(cm + td + tp);
 }
 
 console.log(allProf);
