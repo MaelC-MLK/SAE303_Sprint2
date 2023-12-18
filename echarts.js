@@ -1,23 +1,64 @@
-// import { M } from './js/model.js';
+import { M } from './js/model.js';
 
-// await M.init();
+await M.init();
 
-// const tab = [];
 
-// const data = M.getEvents('mmi1').concat(M.getEvents('mmi2').concat(M.getEvents('mmi3')));
+var tab = [
+  { name: 'MOUTAT Audrey' },
+  { name: 'MORA Frédéric' },
+  { name: 'ADAMCZYK Natacha' },
+  { name: 'GUEDIRA Réda' },
+  { name: 'LAVEFVE Valérie' },
+  { name: 'SPRINGINSFELD Denis' },
+  { name: 'CRESPIN Benoit' },
+  { name: 'ADAM Fabrice' },
+  { name: 'AYMARD Adrien' },
+  { name: 'AYMARD Alain' },
+  { name: 'BABIN Valentin' },
+  { name: 'BONNAUD Lucile' },
+  { name: 'BERTHIER Hélène' },
+  { name: 'CHANTELOUP Amelin' },
+  { name: 'CREDEVILLE Maxime' },
+  { name: 'CHUPIN Suzanne' },
+  { name: 'DAL BELLO Marine' },
+  { name: 'DEMAISON Guillaume' },
+  { name: 'DULAC Benoit' },
+  { name: 'DUBREUIL Anne-Sophie' },
+  { name: 'FEYDI Philippe' },
+  { name: 'FIAMMETTI Deborah' },
+  { name: 'FLITTI Eric' },
+  { name: 'GERAUD Fabien' },
+  { name: 'GOUDARD Bérénice' },
+  { name: 'GRASSET Véronique' },
+  { name: 'JARDOU Thomas' },
+  { name: 'JAUFFRET Manon' },
+  { name: 'JOUY Maxime' },
+  { name: 'LAFONT Mathieu' },
+  { name: 'LASCAUD Raphaël' },
+  { name: 'LAZARE Jean-Cédric' },
+  { name: 'LE BAIL Emma' },
+  { name: 'LECOMTE Catherine' },
+  { name: 'MARTY Thomas' },
+  { name: 'MONDOLLOT Rémi' },
+  { name: 'MINIER Jules' },
+  { name: 'NENIN Cédric' },
+  { name: 'PAILLIER Stéphane' },
+  { name: 'PINAUD Anaïs' },
+  { name: 'PORRO Heinich' },
+  { name: 'PORTAL Nicolas' },
+  { name: 'SABOURIN Erwan' },
+  { name: 'SINCLAIR Diego' },
+  { name: 'THARAUD Sébastien' },
+  { name: 'TZVETKOVA Maria' },
+  { name: 'TURBELIN Pierre' },
+  { name: 'VALETTE Sophie' },
+  { name: 'LU Inès' },
+  { name: 'KABAB Simon' },
+  { name: 'VEILLON Pascal' }
+];
 
-// for (let ev of data) {
-//   console.log(ev);
 
-//   if (ev.enseignant == null || ev.enseignant.includes('adamczyk') || ev.enseignant.includes('crespin') || ev.enseignant.includes('lavefve') || ev.enseignant.includes('mora') || ev.enseignant.includes('guedira') || ev.enseignant.includes('moutat') || ev.enseignant.includes('springinsfeld')) {
-//     console.log('prof');
-//   } else {
-//     console.log('intervenant');
-//   }
-
-//   tab.push({ name: ev.title, quantity: 30 });
-
-// }
+const data = M.getEvents('mmi1').concat(M.getEvents('mmi2').concat(M.getEvents('mmi3')));
 
 import * as echarts from 'echarts';
 
@@ -29,7 +70,8 @@ option = {
   tooltip: {
     trigger: 'axis',
     axisPointer: {
-      type: 'shadow'
+      // Use axis to trigger tooltip
+      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
     }
   },
   legend: {},
@@ -44,7 +86,7 @@ option = {
   },
   yAxis: {
     type: 'category',
-    data: ['MOUTAT Audrey','MORA Frederic','ADAMCZYK Natacha','GUEDIRA Reda','LAVEFVE Valerie','SPRINGINSFELD Denis','CRESPIN Benoit','ADAM Fabrice','AYMARD Adrien','AYMARD Alain','BABIN Valentin','BONNAUD Lucile','BERTHIER Helene','CHANTELOUP Amelin','CREDEVILLE Maxime','CHUPIN Suzanne','DAL BELLO Marine','DEMAISON Guillaume','DULAC Benoit','DUBREUIL Anne-Sophie','FEYDI Philippe','FIAMMETTI Deborah','FLITTI Eric','GERAUD Fabien','GOUDARD Berenice','GRASSET Veronique','JARDOU Thomas','JAUFFRET Manon','JOUY Maxime','LAFONT Mathieu','LASCAUD Raphael','LAZARE Jean-Cedric','LE BAIL Emma','LECOMTE Catherine','MARTY Thomas','MONDOLLOT Remi','MINIER Jules','NENIN Cedric','PAILLIER Stephane','PINAUD Anais','PORRO Heinich','PORTAL Nicolas','SABOURIN Erwan','SINCLAIR Diego','THARAUD Sebastien','TZVETKOVA Maria','TURBELIN Pierre','VALETTE Sophie','LU Ines','KABAB Simon','VEILLON Pascal']
+    data: tab.map(e => e.name)
   },
   series: [
     {
@@ -57,7 +99,7 @@ option = {
       emphasis: {
         focus: 'series'
       },
-      data: []
+      data: [320, 302, 301, 334, 390, 330, 320]
     },
     {
       name: 'TD',
@@ -69,7 +111,7 @@ option = {
       emphasis: {
         focus: 'series'
       },
-      data: []
+      data: [120, 132, 101, 134, 90, 230, 210]
     },
     {
       name: 'TP',
@@ -81,7 +123,7 @@ option = {
       emphasis: {
         focus: 'series'
       },
-      data: []
+      data: [220, 182, 191, 234, 290, 330, 310]
     },
   ]
 };
