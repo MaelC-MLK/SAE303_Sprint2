@@ -44,18 +44,6 @@ var series = [
     stack: 'a',
     name: 'c'
   },
-  {
-    data: [30, '-', 0, 20, 10, '-', 0],
-    type: 'bar',
-    stack: 'b',
-    name: 'd'
-  },
-  {
-    data: [10, 20, 150, 0, '-', 50, 10],
-    type: 'bar',
-    stack: 'b',
-    name: 'e'
-  }
 ];
 
 const stackInfo = {};
