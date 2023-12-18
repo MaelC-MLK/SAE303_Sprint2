@@ -8,7 +8,6 @@ class Event {
     #end;
     #location;
     #groups;
-    #enseignant;
 
     constructor(id, summary, description, start, end, location) {
         this.#id = id;
@@ -23,9 +22,6 @@ class Event {
         this.#groups = this.#groups.split('.');
         this.#groups = this.#groups.map(gr => gr.replace(/\s/g, ""));
 
-        
-        const matchperson = this.#summary.match(/^.*\d (.*)/);
-        this.#enseignant = matchperson ? matchperson[1].toLowerCase() : null;
 
     }
 
@@ -70,8 +66,17 @@ class Event {
 
     }
 
-    get enseignant() {
-        return this.#enseignant;
+    get hours() {
+        if (this.#start && this.#end) {
+            let startDate = this.#start;
+            let endDate = this.#end;
+            let timeDifference = endDate.getTime() - startDate.getTime();
+            let hoursDifference = timeDifference / (1000 * 3600);
+
+            return hoursDifference;
+        } else {
+            return null;
+        }
     }
 
     get ressources() {
@@ -94,6 +99,7 @@ class Event {
             type : this.type,
             enseignant : this.enseignant,
             ressources : this.ressources,
+            hours : this.hours,
         }
     }
 }
