@@ -8,7 +8,6 @@ class Event {
     #end;
     #location;
     #groups;
-    #enseignant;
 
     constructor(id, summary, description, start, end, location) {
         this.#id = id;
@@ -23,9 +22,6 @@ class Event {
         this.#groups = this.#groups.split('.');
         this.#groups = this.#groups.map(gr => gr.replace(/\s/g, ""));
 
-        
-        const matchperson = this.#summary.match(/^.*\d (.*)/);
-        this.#enseignant = matchperson ? matchperson[1].toLowerCase() : null;
 
     }
 
@@ -70,9 +66,6 @@ class Event {
 
     }
 
-    get enseignant() {
-        return this.#enseignant;
-    }
 
     get ressources() {
         let ressources = this.#summary.split(" ");
