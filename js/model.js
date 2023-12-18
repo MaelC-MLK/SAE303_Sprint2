@@ -26,7 +26,6 @@ M.getEventsByGroup = function(annee, group) {
 
 
 
-
 M.init = async function() {
     let data = await fetch('./data/mmi1.ics');
     data = await data.text();

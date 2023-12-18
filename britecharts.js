@@ -1,3 +1,7 @@
+import {M} from './js/model.js';
+
+await M.init();
+
 const data = [
     { name: 'Caca', id: 1, quantity: 86, percentage: 5 },
     { name: 'Pipi', id: 2, quantity: 300, percentage: 18 },
@@ -40,8 +44,8 @@ const data = [
   
   }
   
-  createHorizontalBarChart();
   createDonutChart();
+  createHorizontalBarChart();
   
   
   
