@@ -101,14 +101,7 @@ class Event {
     }
   
     get resources() {
-      let regex;
-      if (this.#summary.startsWith('SAÉ')) {
-        regex = /SAÉ\s(\d+\.\d+)/;
-      } else if (this.#summary.startsWith('R')) {
-        regex = /R(\d+\.\d+)/;
-      } else {
-        return 'Non spécifié';
-      }
+      let regex = /^(R|(SA))[EÉ ]{0,2}[1-6](\.Crea)?(\.DWeb-DI)?\.[0-9]{2}/;
   
       let match = this.#summary.match(regex);
       if (match && match[0]) {
