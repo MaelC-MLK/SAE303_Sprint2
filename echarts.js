@@ -1,4 +1,5 @@
 import { M } from './js/model.js';
+import * as echarts from 'echarts';
 
 await M.init();
 
@@ -6,13 +7,8 @@ await M.init();
 var tab = [
   "ADAM Fabrice", "ADAMCZYK Natacha", "AYMARD Adrien", "AYMARD Alain", "BABIN Valentin", "BERTHIER Hélène", "CHANTELOUP Amelin", "CHUPIN Suzanne", "CREDEVILLE Maxime", "CRESPIN Benoit", "DAL BELLO Marine", "DEMAISON Guillaume", "DUBREUIL Anne-Sophie", "DULAC Benoit", "FEYDI Philippe", "FIAMMETTI Deborah", "FLITTI Eric", "GERAUD Fabien", "GOUDARD Bérénice", "GRASSET Véronique", "GUEDIRA Réda", "JARDOU Thomas", "JAUFFRET Manon", "JOUY Maxime", "KABAB Simon", "LAFONT Mathieu", "LAVEFVE Valérie", "LASCAUD Raphaël", "LAZARE Jean-Cédric", "LE BAIL Emma", "LECOMTE Catherine", "LU Inès", "MARTY Thomas", "MONDOLLOT Rémi", "MORA Frédéric", "MOUTAT Audrey", "NENIN Cédric", "PAILLIER Stéphane", "PINAUD Anaïs", "PORRO Heinich", "PORTAL Nicolas", "SABOURIN Erwan", "SINCLAIR Diego", "SPRINGINSFELD Denis", "THARAUD Sébastien", "TZVETKOVA Maria", "TURBELIN Pierre", "VALETTE Sophie", "VEILLON Pascal"
 ];
-
 let allProf = {};
-
 const data = M.getEvents('mmi1').concat(M.getEvents('mmi2').concat(M.getEvents('mmi3')));
-
-import * as echarts from 'echarts';
-
 var chartDom = document.getElementById('main');
 var myChart = echarts.init(chartDom, 'dark');
 var option;
@@ -121,7 +117,6 @@ function updateData(semestreValue) {
     let cm = 0;
     let td = 0;
     let tp = 0;
-
     for (let i = 0; i < allProf[ev].length; i++) {
       if (semestreValue === "0" || allProf[ev][i].semester.includes(semestreValue)) {
         if (allProf[ev][i].title.includes("CM")) cm += allProf[ev][i].hours;
@@ -129,23 +124,17 @@ function updateData(semestreValue) {
         if (allProf[ev][i].title.includes("TP")) tp += allProf[ev][i].hours;
       }
     }
-
     option.series[0].data.push(cm);
     option.series[1].data.push(td);
     option.series[2].data.push(tp);
     option.series[3].data.push(cm + td + tp);
   }
-
   myChart.setOption(option);
 }
-
-// Événement de changement de sélection du semestre
 semestre.addEventListener("change", function () {
   const semestreValue = semestre.options[semestre.selectedIndex].value;
   updateData(semestreValue);
 });
-
-// Initialisation des données avec la valeur initiale du sélecteur de semestre
 updateData(semestre.options[semestre.selectedIndex].value);
 
 
