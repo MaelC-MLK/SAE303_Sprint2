@@ -71,7 +71,7 @@ function update(name) {
         for (let course in allProf[prof][sem]) {
           let courseData = {
             name: course,
-
+            
             children: []
           };
 
@@ -85,15 +85,16 @@ function update(name) {
 
               typeHours[event.type] += event.hours;
             });
+            
           }
 
           for (let type in typeHours) {
             let typeData = {
               name: type,
               value: typeHours[type],
+              
 
             };
-
             courseData.children.push(typeData);
           }
 
@@ -168,6 +169,7 @@ var option;
 option = {
   series: {
     type: 'sunburst',
+
     data: data,
     radius: [0, '95%'],
     sort: undefined,
@@ -175,36 +177,49 @@ option = {
       focus: 'ancestor'
     },
     levels: [
-      {},
       {
-        r0: '15%',
-        r: '35%',
+
+      },
+      {
+        r0: '0%',
+        r: '20%', 
         itemStyle: {
-          borderWidth: 2
+          borderWidth: 2,
+          color: '#4a3052'
         },
         label: {
           rotate: 'tangential'
         }
       },
       {
-        r0: '35%',
-        r: '70%',
-        label: {
-          align: 'right'
-        }
+        r0: '20%', 
+        r: '47%', 
+        itemStyle: {
+          color: '#9560a4'
+        },
+        
       },
       {
-        r0: '70%',
-        r: '72%',
+        r0: '47%', 
+        r: '76%', 
+        itemStyle: {
+          color: '#aa7fb6'
+        },
+      },
+      {
+        r0: '78%', 
+        r: '85%', 
         label: {
           position: 'outside',
           padding: 3,
           silent: false
         },
         itemStyle: {
-          borderWidth: 3
+          borderWidth: 2,
+          color: '#caafd1'
         }
-      }
+      },
+
     ]
   }
 };
