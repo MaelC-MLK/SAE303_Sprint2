@@ -112,11 +112,8 @@ for (let ev of tab) {
 }
 
 let semestre = document.getElementById("semestre");
-let allProfFiltered = {};
-
-// Fonction pour mettre à jour les données selon le semestre sélectionné
 function updateData(semestreValue) {
-  option.series.forEach(series => {
+  option.series.filter(series => {
     series.data = [];
   });
 
@@ -126,11 +123,10 @@ function updateData(semestreValue) {
     let tp = 0;
 
     for (let i = 0; i < allProf[ev].length; i++) {
-      const event = allProf[ev][i];
-      if (semestreValue === "0" || event.semester.includes(semestreValue)) {
-        if (event.title.includes("CM")) cm += event.hours;
-        if (event.title.includes("TD")) td += event.hours;
-        if (event.title.includes("TP")) tp += event.hours;
+      if (semestreValue === "0" || allProf[ev][i].semester.includes(semestreValue)) {
+        if (allProf[ev][i].title.includes("CM")) cm += allProf[ev][i].hours;
+        if (allProf[ev][i].title.includes("TD")) td += allProf[ev][i].hours;
+        if (allProf[ev][i].title.includes("TP")) tp += allProf[ev][i].hours;
       }
     }
 
