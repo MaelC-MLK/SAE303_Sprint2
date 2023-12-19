@@ -110,18 +110,9 @@ option = {
   ]
 };
 
-
-
-
-
-
 for (let ev of tab) {
-
   allProf[ev] = data.filter((event) => { return event.title.includes(ev) });
-
 }
-
-
 
 for (let ev in allProf) {
 
@@ -148,7 +139,24 @@ for (let ev in allProf) {
   option.series[3].data.push(cm + td + tp);
 }
 
-console.log(allProf);
+
+//filtrer avec un select par semestre
+let semestre = document.getElementById("semestre");
+
+semestre.addEventListener("change", function () {
+  let selectedSemester = semestre.value; // Obtenez la valeur du semestre sélectionné
+
+  // Pour chaque personne, filtrez ses cours par semestre
+  for (let ev in allProf) {
+    let filteredCourses = allProf[ev].filter((event) => {
+      return event.semester === selectedSemester; // Assurez-vous que vos données de cours ont une propriété 'semester'
+    });
+
+    console.log(ev, filteredCourses);
+  }
+});
+
+
 
 
 option && myChart.setOption(option);
