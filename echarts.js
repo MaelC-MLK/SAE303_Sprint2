@@ -106,46 +106,60 @@ for (let ev of tab) {
   allProf[ev] = data.filter((event) => { return event.title.includes(ev) });
 }
 
-for (let ev in allProf) {
+// for (let ev in allProf) {
 
-  let cm = 0;
-  let td = 0;
-  let tp = 0;
+//   let cm = 0;
+//   let td = 0;
+//   let tp = 0;
 
-  for (let i = 0; i < allProf[ev].length; i++) {
+//   for (let i = 0; i < allProf[ev].length; i++) {
 
-    if (allProf[ev][i].title.includes("CM")) {
-      cm += allProf[ev][i].hours;
-    }
-    if (allProf[ev][i].title.includes("TD")) {
-      td += allProf[ev][i].hours;
-    }
-    if (allProf[ev][i].title.includes("TP")) {
-      tp += allProf[ev][i].hours;
-    }
-  }
+//     if (allProf[ev][i].title.includes("CM")) {
+//       cm += allProf[ev][i].hours;
+//     }
+//     if (allProf[ev][i].title.includes("TD")) {
+//       td += allProf[ev][i].hours;
+//     }
+//     if (allProf[ev][i].title.includes("TP")) {
+//       tp += allProf[ev][i].hours;
+//     }
+//   }
 
-  option.series[0].data.push(cm);
-  option.series[1].data.push(td);
-  option.series[2].data.push(tp);
-  option.series[3].data.push(cm + td + tp);
-}
+//   option.series[0].data.push(cm);
+//   option.series[1].data.push(td);
+//   option.series[2].data.push(tp);
+//   option.series[3].data.push(cm + td + tp);
+// }
 
-
-//filtrer avec un select par semestre
 let semestre = document.getElementById("semestre");
-
+let semestreValue = semestre.options[semestre.selectedIndex].value;
 semestre.addEventListener("change", function () {
-  let selectedSemester = semestre.value; // Obtenez la valeur du semestre sélectionné
-
-  // Pour chaque personne, filtrez ses cours par semestre
+  semestreValue = semestre.options[semestre.selectedIndex].value;
+  option.series[0].data = [];
+  option.series[1].data = [];
+  option.series[2].data = [];
+  option.series[3].data = [];
   for (let ev in allProf) {
-    let filteredCourses = allProf[ev].filter((event) => {
-      return event.semester === selectedSemester; // Assurez-vous que vos données de cours ont une propriété 'semester'
-    });
-
-    console.log(ev, filteredCourses);
+    let cm = 0;
+    let td = 0;
+    let tp = 0;
+    for (let i = 0; i < allProf[ev].length; i++) {
+      if (allProf[ev][i].title.includes("CM") && allProf[ev][i].title.includes(semestreValue)) {
+        cm += allProf[ev][i].hours;
+      }
+      if (allProf[ev][i].title.includes("TD") && allProf[ev][i].title.includes(semestreValue)) {
+        td += allProf[ev][i].hours;
+      }
+      if (allProf[ev][i].title.includes("TP") && allProf[ev][i].title.includes(semestreValue)) {
+        tp += allProf[ev][i].hours;
+      }
+    }
+    option.series[0].data.push(cm);
+    option.series[1].data.push(td);
+    option.series[2].data.push(tp);
+    option.series[3].data.push(cm + td + tp);
   }
+  myChart.setOption(option);
 });
 
 
