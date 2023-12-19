@@ -117,7 +117,7 @@ option = {
     }
   },
   legend: {
-    data: ['Forest', 'Steppe', 'Desert', 'Wetland']
+    data: ['CM', 'TD', 'TP', 'SAÉ']
   },
   toolbox: {
     show: true,
@@ -136,7 +136,7 @@ option = {
     {
       type: 'category',
       axisTick: { show: false },
-      data: ['2012', '2013', '2014', '2015', '2016']
+      data: ['semestre 1', 'semestre 2', 'semestre 3', 'semestre 4', 'semestre 5', 'semestre 6']
     }
   ],
   yAxis: [
@@ -146,41 +146,41 @@ option = {
   ],
   series: [
     {
-      name: 'Forest',
+      name: 'CM',
       type: 'bar',
       barGap: 0,
       label: labelOption,
       emphasis: {
-        focus: 'series'
+        focus: 'CM'
       },
-      data: [320, 332, 301, 334, 390]
+      data: []
     },
     {
-      name: 'Steppe',
+      name: 'TD',
       type: 'bar',
       label: labelOption,
       emphasis: {
-        focus: 'series'
+        focus: 'TD'
       },
-      data: [220, 182, 191, 234, 290]
+      data: []
     },
     {
-      name: 'Desert',
+      name: 'TP',
       type: 'bar',
       label: labelOption,
       emphasis: {
-        focus: 'series'
+        focus: 'TP'
       },
-      data: [150, 232, 201, 154, 190]
+      data: []
     },
     {
-      name: 'Wetland',
+      name: 'SAÉ',
       type: 'bar',
       label: labelOption,
       emphasis: {
-        focus: 'series'
+        focus: 'SAÉ'
       },
-      data: [98, 77, 101, 99, 40]
+      data: []
     }
   ]
 };
