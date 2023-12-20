@@ -166,8 +166,8 @@ function update(name) {
         for (let hour in allProf[prof][day]) {
           if (allProf[prof][day][hour] > 0) {
             data.push([parseInt(day), 12 - (hour - 8), allProf[prof][day][hour]]);
+            // le calcule permet de convertir les heures en index de tableau (ex: 20h -> 0, 19h -> 1, 20h -> 2 etc.)
           }
-          // le calcule permet de convertir les heures en index de tableau (ex: 20h -> 0, 19h -> 1, 20h -> 2 etc.)
 
         }
       }
@@ -205,7 +205,7 @@ option = {
   },
   visualMap: {
     min: 0,
-    max: 10,
+    max: 15,
     calculable: true,
     orient: "horizontal",
     left: "center",
