@@ -14,17 +14,14 @@ const dataAll = M.getEvents('mmi1').concat(M.getEvents('mmi2').concat(M.getEvent
 var chartDom = document.getElementById('heatmap-charts');
 var myChart = echarts.init(chartDom, "dark");
 var option;
+console.log(dataAll);
 
 // prettier-ignore
 const hours = ["20h","19h","18h","17h","16h","15h","14h","13h","12h","11h","10h","9h","8h"];
 // prettier-ignore
-const days = ["Vendredi","Jeudi","Mercredi","Mardi","Lundi"];
+const days = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"];
 // prettier-ignore
-const data = [
-
-
-  
-]
+const data = [[0,0, 5]]
     .map(function (item) {
     return [item[1], item[0], item[2] || '-'];
 });
@@ -75,19 +72,5 @@ option = {
     }
   ]
 };
-
-
-
-
-
-
-
-
-
-
-for (let ev of tab) {
-  allProf[ev] = dataAll.filter((event) => { return event.title.includes(ev) });
-}
-
 
 option && myChart.setOption(option);
