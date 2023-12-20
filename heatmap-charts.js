@@ -42,40 +42,29 @@ let intersectByHour = function (hour, start, end){
   }
   
   }
-for (let ev of tab) {
-  allProf[ev] = {};
 
-  let profEvents = dataAll.filter((event) => { return event.title.includes(ev) });
 
-  // Définir les jours de la semaine
-  let days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
 
-  for (let day of days) {
-    let dayEvents = profEvents.filter((event) => { return event.day === day });
+  for (let ev of tab) {
+    allProf[ev] = {};
+  
+    let profEvents = dataAll.filter((event) => { return event.title.includes(ev) });
+  
+    for (let i = 0; i <= 4; i++) {
+      let dayEvents = profEvents.filter((event) => { return event.day === i });
+  
+      allProf[ev][i] = {};
 
-    allProf[ev][day] = {};
+      for (let j = 8; j <= 20; j++) {
+        let hourEvents = dayEvents.filter((event) => { return intersectByHour(j, event.start, event.end) > 0 });
 
-    // Supposons que 'hours' est un tableau de toutes les heures possibles
-    let hours = Array.from({length: 13}, (_, i) => i + 8);
+        allProf[ev][i][j] = hourEvents;
+      }
 
-    for (let hour of hours) {
-      // Utiliser la fonction intersectByHour pour calculer la durée de chaque cours
-      let totalDuration = dayEvents.reduce((total, event) => {
-        return total + intersectByHour(hour, event.start, event.end);
-      }, 0);
-
-      // Ajouter toujours la durée totale au tableau allProf
-      allProf[ev][day][hour] = totalDuration;
     }
   }
-}
 
 console.log(allProf);
-
-  console.log(intersectByHour(11, dataAll[0].start, dataAll[0].end));
-
-  console.log(dataAll[0].start);
-  console.log(dataAll[0].end);
 
 var chartDom = document.getElementById('heatmap-charts');
 var myChart = echarts.init(chartDom, "dark");
@@ -83,10 +72,28 @@ var option;
 
 const hours = ["20h","19h","18h","17h","16h","15h","14h","13h","12h","11h","10h","9h","8h"];
 const days = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"];
-const data = [[3,3, 5],]
+const data = []
     .map(function (item) {
     return [item[1], item[0], item[2] || '-'];
 });
+
+
+
+for (let ev in allProf) {
+  for (let day in allProf[ev]) {
+    for (let hour in allProf[ev][day]) {
+      // Calculer l'index de l'heure
+      let hourIndex = hours.indexOf(hour + "h");
+      if (hourIndex !== -1) {
+        // Ajouter un nouvel élément à data
+        data.push([hourIndex, parseInt(day), allProf[ev][day][hour]]);
+      }
+    }
+  }
+}
+
+
+
 option = {
   tooltip: {
     position: 'bottom'
