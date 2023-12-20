@@ -43,6 +43,10 @@ let intersectByHour = function (hour, start, end){
   
   }
 
+console.log(intersectByHour(11, dataAll[0].start, dataAll[0].end));
+
+console.log(dataAll[0].start);
+console.log(dataAll[0].end);
 
 
   for (let ev of tab) {
@@ -57,6 +61,8 @@ let intersectByHour = function (hour, start, end){
 
       for (let j = 8; j <= 20; j++) {
         let hourEvents = dayEvents.filter((event) => { return intersectByHour(j, event.start, event.end) > 0 });
+
+        
 
         allProf[ev][i][j] = hourEvents;
       }
