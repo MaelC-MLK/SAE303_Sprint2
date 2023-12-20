@@ -112,54 +112,6 @@ function update(name) {
 update(selectName.value);
 
 
-var previousdata = [
-  {
-    name: 'S1',
-    itemStyle: {
-      color: '#da0d68'
-    },
-    children: [
-      {
-        name: 'R1.12',
-        value: 10,
-        itemStyle: {
-          color: '#975e6d'
-        }
-      },
-      {
-        name: 'R1.15',
-        itemStyle: {
-          color: '#e0719c'
-        },
-        children: [
-          {
-            name: 'CM',
-            value: 1,
-            itemStyle: {
-              color: '#f99e1c'
-            }
-          },
-          {
-            name: 'TD',
-            value: 0,
-            itemStyle: {
-              color: '#ef5a78'
-            }
-          },
-          {
-            name: 'TP',
-            value: 8,
-            itemStyle: {
-              color: '#f7f1bd'
-            }
-          }
-        ]
-      }
-    ]
-  },
-
-];
-
 
 
 var chartDom = document.getElementById('sunburst-charts');
@@ -201,14 +153,14 @@ option = {
       },
       {
         r0: '47%', 
-        r: '76%', 
+        r: '78%', 
         itemStyle: {
           color: '#aa7fb6'
         },
       },
       {
         r0: '78%', 
-        r: '85%', 
+        r: '83%', 
         label: {
           position: 'outside',
           padding: 3,
