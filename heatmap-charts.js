@@ -143,10 +143,41 @@ const hours = [
   "8h",
 ];
 const days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
-const data = [].map(function (item) {
-  return [item[1], item[0], item[2] || "-"];
+const data = []
+  .map(function (item) {
+    return [item[1], item[0], item[2] || "-"];
+  });
+
+let selectName = document.getElementById("intervenant");
+selectName.addEventListener("change", () => {
+  update(selectName.value);
+  myChart.setOption(option);
 });
 
+function update(name) {
+
+  data.length = 0;
+
+  for (let prof in allProf) {
+    if (prof == name) {
+      for (let day in allProf[prof]) {
+
+        for (let hour in allProf[prof][day]) {
+          if (allProf[prof][day][hour] > 0) {
+            data.push([parseInt(day), 12 - (hour - 8), allProf[prof][day][hour]]);
+          }
+          // le calcule permet de convertir les heures en index de tableau (ex: 20h -> 0, 19h -> 1, 20h -> 2 etc.)
+
+        }
+      }
+    }
+  }
+  console.log(data);
+}
+
+
+
+update(selectName.value);
 
 
 
