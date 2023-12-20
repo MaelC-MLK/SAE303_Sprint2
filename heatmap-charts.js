@@ -10,6 +10,7 @@ var tab = [
   "AYMARD Alain",
   "BABIN Valentin",
   "BERTHIER Hélène",
+  "BONNAUD Lucile",
   "CHANTELOUP Amelin",
   "CHUPIN Suzanne",
   "CREDEVILLE Maxime",
@@ -37,6 +38,7 @@ var tab = [
   "LECOMTE Catherine",
   "LU Inès",
   "MARTY Thomas",
+  "MINIER Jules",
   "MONDOLLOT Rémi",
   "MORA Frédéric",
   "MOUTAT Audrey",
@@ -121,7 +123,6 @@ for (let ev of tab) {
   }
 }
 
-console.log(allProf);
 
 var chartDom = document.getElementById("heatmap-charts");
 var myChart = echarts.init(chartDom, "dark");
@@ -172,7 +173,6 @@ function update(name) {
       }
     }
   }
-  console.log(data);
 }
 
 
